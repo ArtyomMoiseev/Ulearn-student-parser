@@ -8,7 +8,6 @@ public class DbWorker {
             try {
                 String url = "jdbc:sqlite:identifier.sqlite";
                 conn = DriverManager.getConnection(url);
-                System.out.println("Connection to SQLite has been established.");
 
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -35,8 +34,9 @@ public class DbWorker {
             var bDate = data.getbDate();
             var sql = String.format("INSERT INTO vkData VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s')",
                     id, name, lastName,bigPhotoUrl, smallPhotoUrl, city, bDate);
+            System.out.println(sql);
             try {
-                conn.prepareStatement(sql).executeQuery();
+                conn.prepareStatement(sql).executeUpdate();
             }
             catch (Exception e) {
                 System.out.println(e);
@@ -44,22 +44,28 @@ public class DbWorker {
             }
         }
 
-        public static String getVkDataById(int id) throws SQLException {
-            var sql = "SELECT * FROM vkData WHERE vkID = " + id;
+        public static VkData getVkDataById(int id) throws SQLException {
+            var sql = "SELECT * FROM vkData";
             String[] columns = new String[] {"vkID", "name", "lastName", "bigPhotoUrl", "smallPhotoUrl", "city", "bDate"};
-            var statement = conn.prepareStatement(sql, columns);
-            var st = statement.executeQuery();
-            System.out.println(st.next());
-            return st.getString("name");
-//            return new VkData(
-//                    st.getInt("vkID"),
-//                    st.getString("name"),
-//                    st.getString("lastName"),
-//                    st.getString("bigPhotoUrl"),
-//                    st.getString("smallPhotoUrl"),
-//                    st.getString("city"),
-//                    st.getString("bDate")
-//            );
+            var st = conn.createStatement().executeQuery(sql);
+
+            return new VkData(
+                    st.getInt("vkID"),
+                    st.getString("name"),
+                    st.getString("lastName"),
+                    st.getString("bigPhotoUrl"),
+                    st.getString("smallPhotoUrl"),
+                    st.getString("city"),
+                    st.getString("bDate")
+            );
+        }
+
+        public static void addStudentRecord(String firstname, String lastname, String groupCode, int vkId, String CourseSubs) {
+
+
+            var sql = String.format("INSERT INTO students VALUES('%s', '%s', '%s', '%s', '%s')",
+                    firstname, lastname, groupCode, vkId, CourseSubs);
+
         }
 
 }

@@ -3,15 +3,13 @@ package com.company;
 import java.util.ArrayList;
 
 public class Student extends Human {
-    private ArrayList<Theme> themes;
-    private String groupCode;
-    private int score;
+    private ArrayList<CourseRecord> courses;
+    private int id;
 
-    public Student(String firstName, String lastName, String groupCode, int score, ArrayList<Theme> themes) {
+    public Student(String firstName, String lastName, CourseRecord record, int id) {
         super(firstName, lastName);
-        this.groupCode = groupCode;
-        this.score = score;
-        this.themes = themes;
+        this.courses.add(record);
+        this.id = id;
     }
 
     public void setVkData(VkData data) {

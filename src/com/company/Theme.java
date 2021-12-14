@@ -1,5 +1,7 @@
 package com.company;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Theme {
     private String name;
@@ -24,6 +26,24 @@ public class Theme {
             builder.append(t.toString() + "; ");
         }
         return builder.toString();
+    }
+
+    public ArrayList<String> scoresToComma() {
+        var scores = new StringBuilder();
+        var names = new StringBuilder();
+        var maxScores = new StringBuilder();
+
+        for (var score: tasks) {
+            names.append(score.getName() + ";");
+            scores.append(score.getScore() + ";");
+            maxScores.append(score.getMaxScore() + ";");
+        }
+
+        var result = new ArrayList<String>();
+        result.add(names.toString());
+        result.add(maxScores.toString());
+        result.add(scores.toString());
+        return result;
     }
 
 }

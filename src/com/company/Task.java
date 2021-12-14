@@ -12,6 +12,18 @@ public class Task {
         this.maxScore = maxScore;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public int getMaxScore() {
+        return maxScore;
+    }
+
     @Override
     public String toString() {
         return this.name + ' ' + this.score + '/' + this.maxScore;
