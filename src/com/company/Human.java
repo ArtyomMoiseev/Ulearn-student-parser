@@ -4,11 +4,7 @@ public class Human {
     private String firstName;
     private String lastName;
     private int birthYear;
-    private VkData vkData;
 
-    public void setVkData(VkData data) {
-        vkData = data;
-    }
 
     public Human(String firstName, String lastName, int birthYear) {
         this.firstName = firstName;
@@ -44,7 +40,4 @@ public class Human {
         return this.firstName + ' ' + this.lastName + ' ' + this.birthYear;
     }
 
-    public VkData getVkData() {
-        return vkData;
-    }
 }

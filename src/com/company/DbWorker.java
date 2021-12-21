@@ -53,6 +53,7 @@ public class DbWorker {
                     st.getInt("vkID"),
                     st.getString("name"),
                     st.getString("lastName"),
+                    st.getInt("sex"),
                     st.getString("bigPhotoUrl"),
                     st.getString("smallPhotoUrl"),
                     st.getString("city"),
@@ -67,5 +68,21 @@ public class DbWorker {
                     firstname, lastname, groupCode, vkId, CourseSubs);
 
         }
+
+//        public static CourseRecord getCourseRecord(int courseId) throws SQLException{
+//            var sql = "SELECT * FROM course WHERE courseID =" + courseId;
+//            var resultSet = conn.createStatement().executeQuery(sql);
+//
+//            var themeNames = resultSet.getString("themeNames").split(";");
+//            var themeLength = resultSet.getString("themeLengths").split(";");
+//            var taskNames = resultSet.getString("taskNames").split(";");
+//            var taskMaxScores = resultSet.getString("taskMaxScores").split(";");
+//            var taskScores = resultSet.getString("taskScores").split(";");
+//            for (var th: themeNames) {
+//                for (var i = 0; i < )
+//                var theme = new Theme()
+//            }
+//            var resultRecord = new CourseRecord(resultSet.getString("courseName"), resultSet.getString("groupCode"),)
+//        }
 
 }

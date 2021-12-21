@@ -11,5 +11,6 @@
     <orderEntry type="library" name="vk.api.sdk" level="application" />
     <orderEntry type="library" name="json" level="project" />
     <orderEntry type="library" name="xerial.sqlite.jdbc" level="project" />
+    <orderEntry type="library" name="jfree.jfreechart" level="project" />
   </component>
 </module>

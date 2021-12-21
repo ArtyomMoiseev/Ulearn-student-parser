@@ -3,36 +3,45 @@ package com.company;
 import java.util.ArrayList;
 
 public class Student extends Human {
-    private ArrayList<CourseRecord> courses;
-    private int id;
+    private ArrayList<CourseRecord> courses = new ArrayList<CourseRecord>();
+    private VkData vkData;
 
-    public Student(String firstName, String lastName, CourseRecord record, int id) {
+    public Student(String firstName, String lastName, CourseRecord record) {
         super(firstName, lastName);
         this.courses.add(record);
-        this.id = id;
     }
 
     public void setVkData(VkData data) {
-        super.setVkData(data);
+        vkData = data;
     }
 
     @Override
     public String toString() {
+        var courseRecord = courses.get(0);
         var themesBuilder = new StringBuilder();
-        for (var t: themes) {
+        for (var t: courseRecord.getThemes()) {
             themesBuilder.append(t.toString() + '\n');
         }
 
-        if (super.getVkData() != null) {
-            return super.toString() + ' ' + groupCode + ' ' + score + '\n' + super.getVkData().toString();
+        if (vkData != null) {
+            return super.toString() + ' ' + courseRecord.getGroupCode() + ' ' + '\n' + vkData.toString();
         }
         else {
-            return super.toString() + ' ' + groupCode + ' ' + score;
+            return super.toString() + ' ' + courseRecord.getGroupCode();
         }
     }
 
-    public ArrayList<Theme> getThemes() {
-        return themes;
+    public CourseRecord getCourseRecord(String courseName) {
+        for (var c: courses) {
+            if (c.getCourseName().equals(courseName)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException("Course not exist");
+    }
+
+    public VkData getVkData() {
+        return vkData;
     }
 
 }

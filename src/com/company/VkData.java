@@ -8,12 +8,14 @@ public class VkData {
     private String smallPhotoUrl;
     private String city;
     private String bDate;
+    private int sex = 0;
 
 
-    public VkData(int id, String name, String lastName, String bigPhotoUrl, String smallPhotoUrl, String city, String bDate) {
+    public VkData(int id, String name, String lastName, int sex, String bigPhotoUrl, String smallPhotoUrl, String city, String bDate) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
+        this.sex = sex;
         this.bigPhotoUrl = bigPhotoUrl;
         this.smallPhotoUrl = smallPhotoUrl;
         this.city = city;
@@ -28,6 +30,9 @@ public class VkData {
         return bigPhotoUrl;
     }
 
+    public int getSex() {
+        return sex;
+    }
 
     public String getCity() {
         return city;
@@ -43,7 +48,7 @@ public class VkData {
 
     @Override
     public String toString() {
-        return id + " " + bigPhotoUrl + " " + city + " " + bDate;
+        return id + " " + sex + " " + bigPhotoUrl + " " + city + " " + bDate;
     }
 
     public String getName() {
@@ -53,4 +58,5 @@ public class VkData {
     public String getLastName() {
         return lastName;
     }
+
 }

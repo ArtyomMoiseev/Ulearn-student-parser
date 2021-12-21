@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 abstract class Parser {
 
-    public static ArrayList<Student> parseStudentsFromCSV(String path) throws Exception {
+    public static ArrayList<Student> parseStudentsFromCSV(String path, String courseName) throws Exception {
         var result = new ArrayList<Student>();
         var fileReader = new FileReader(path);
 
@@ -25,9 +25,8 @@ abstract class Parser {
             var groupCode = s[1];
             var score = Integer.parseInt(s[2]);
 
-            result.add(new Student(name[1], name[0], groupCode, score, parseTheme(s, themes, tasks, tasksMax)));
+            result.add(new Student(name[1], name[0], new CourseRecord(courseName, groupCode, parseTheme(s, themes, tasks, tasksMax))));
         }
-
         return result;
     }
 

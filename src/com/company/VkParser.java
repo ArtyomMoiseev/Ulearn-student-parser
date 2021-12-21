@@ -33,7 +33,7 @@ public abstract class VkParser {
         TransportClient transportClient = HttpTransportClient.getInstance();
         VkApiClient vk = new VkApiClient(transportClient);
         UserActor actor = new UserActor(vkConst.userId, vkConst.token);
-        var fields = new Fields[] {Fields.PERSONAL, Fields.PHOTO_MAX_ORIG, Fields.ABOUT,Fields.PHOTO_50, Fields.CITY, Fields.BDATE, Fields.NICKNAME, Fields.CONTACTS, Fields.CAREER};
+        var fields = new Fields[] {Fields.PERSONAL, Fields.PHOTO_MAX_ORIG, Fields.ABOUT,Fields.PHOTO_50, Fields.CITY, Fields.BDATE, Fields.NICKNAME, Fields.CONTACTS, Fields.CAREER, Fields.SEX};
 
         var jsonString = vk.groups()
                 .getMembers(actor)
@@ -66,13 +66,14 @@ public abstract class VkParser {
             var jObject = json.getJSONObject(i);
             var name = jObject.getString("first_name");
             var lastname = jObject.getString("last_name");
+            var sex = jObject.getInt("sex");
             var id = jObject.getInt("id");
             var bigPhotoUrl = jObject.getString("photo_max_orig");
             var smallPhotoUrl = jObject.getString("photo_50");
             var city = getStringIfExist(getJsonObjectIfExist(jObject, "city"), "title");
             var bDate = getStringIfExist(jObject, "bdate");
             var nickname = getStringIfExist(jObject, "nickname");
-            var record = new VkData(id, name, lastname, bigPhotoUrl, smallPhotoUrl, city, bDate);
+            var record = new VkData(id, name, lastname,sex, bigPhotoUrl, smallPhotoUrl, city, bDate);
             dict.put(name + " " + lastname, record);
         }
         }

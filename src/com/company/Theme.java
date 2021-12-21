@@ -46,4 +46,28 @@ public class Theme {
         return result;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getSolvedTasks() {
+        var counter = 0;
+        for (var t: tasks) {
+            if (t.getScore() > 0 && t.getName().contains("Задача")) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    public int getTrueAnswersCounter() {
+        var counter = 0;
+        for (var t: tasks) {
+            if (t.getScore() == t.getMaxScore() && t.getName().contains("вопрос")) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
 }
