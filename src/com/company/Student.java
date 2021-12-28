@@ -3,17 +3,13 @@ package com.company;
 import java.util.ArrayList;
 
 public class Student extends Human {
-    private ArrayList<CourseRecord> courses = new ArrayList<CourseRecord>();
-    private VkData vkData;
+    private ArrayList<Course> courses = new ArrayList<Course>();
 
-    public Student(String firstName, String lastName, CourseRecord record) {
+    public Student(String firstName, String lastName, Course record) {
         super(firstName, lastName);
         this.courses.add(record);
     }
 
-    public void setVkData(VkData data) {
-        vkData = data;
-    }
 
     @Override
     public String toString() {
@@ -23,15 +19,15 @@ public class Student extends Human {
             themesBuilder.append(t.toString() + '\n');
         }
 
-        if (vkData != null) {
-            return super.toString() + ' ' + courseRecord.getGroupCode() + ' ' + '\n' + vkData.toString();
+        if (super.getVkId() != 0) {
+            return super.toString() + ' ' + courseRecord.getGroupCode() + ' ' + '\n' + super.toString();
         }
         else {
             return super.toString() + ' ' + courseRecord.getGroupCode();
         }
     }
 
-    public CourseRecord getCourseRecord(String courseName) {
+    public Course getCourseRecord(String courseName) {
         for (var c: courses) {
             if (c.getCourseName().equals(courseName)) {
                 return c;
@@ -40,8 +36,5 @@ public class Student extends Human {
         throw new IllegalArgumentException("Course not exist");
     }
 
-    public VkData getVkData() {
-        return vkData;
-    }
 
 }

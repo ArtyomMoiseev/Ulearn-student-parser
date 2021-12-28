@@ -1,63 +1,62 @@
 package com.company;
 
+import java.util.ArrayList;
+import java.util.Locale;
+
 public class Course {
     private String courseName;
-    private String teacherName;
-    private float score;
-    private float lectureScore;
-    private float practiceScore;
+    private String groupCode;
+    private ArrayList<Theme> themes;
 
-    public Course(String courseName, String teacherName, float score, float lectureScore, float practiceScore) {
+    public Course(String courseName, String groupCode, ArrayList<Theme> themes) {
         this.courseName = courseName;
-        this.teacherName = teacherName;
-        this.score = score;
-        this.lectureScore = lectureScore;
-        this.practiceScore = practiceScore;
-    }
-
-    public Course(String courseName, String teacherName) {
-        this.courseName = courseName;
-        this.teacherName = teacherName;
-        this.score = 0;
-        this.lectureScore = 0;
-        this.practiceScore = 0;
-    }
-
-    @Override
-    public String toString() {
-        return this.courseName + ' ' + this.teacherName + " score:" + score;
+        this.groupCode = groupCode;
+        this.themes = themes;
     }
 
     public String getCourseName() {
         return courseName;
     }
 
-    public String getTeacherName() {
-        return teacherName;
+    public String getGroupCode() {
+        return groupCode;
     }
 
-    public float getScore() {
-        return score;
+    public ArrayList<Theme> getThemes() {
+        return themes;
     }
 
-    public void setScore(float score) {
-        this.score = score;
+    @Override
+    public String toString() {
+        var resultBuilder = new StringBuilder();
+        for (var t: themes) {
+            resultBuilder.append(t.toString());
+            resultBuilder.append("\n");
+        }
+        return resultBuilder.toString();
     }
 
-    public float getLectureScore() {
-        return lectureScore;
-    }
-
-    public void setLectureScore(float lectureScore) {
-        this.lectureScore = lectureScore;
-    }
-
-    public float getPracticeScore() {
-        return practiceScore;
-    }
-
-    public void setPracticeScore(float practiceScore) {
-        this.practiceScore = practiceScore;
+    public ArrayList<String> toDb() {
+        var themesNames = new StringBuilder();
+        var themesLength = new StringBuilder();
+        var scores = new StringBuilder();
+        var names = new StringBuilder();
+        var maxScores = new StringBuilder();
+        for (var theme: themes) {
+            themesNames.append(theme.getName() + ";");
+            themesLength.append(theme.getTasks().size() + ";");
+            var commaTheme = theme.scoresToComma();
+            names.append(commaTheme.get(0));
+            maxScores.append(commaTheme.get(1));
+            scores.append(commaTheme.get(2));
+        }
+        var result = new ArrayList<String>();
+        result.add( themesNames.toString());
+        result.add(themesLength.toString());
+        result.add(scores.toString());
+        result.add(names.toString());
+        result.add(maxScores.toString());
+        return result;
     }
 
 }

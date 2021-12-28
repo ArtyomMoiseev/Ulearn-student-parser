@@ -1,21 +1,37 @@
 package com.company;
 
+import java.util.Date;
+
 public class Human {
     private String firstName;
     private String lastName;
-    private int birthYear;
+    private String bigPhotoUrl = null;
+    private String smallPhotoUrl = null;
+    private String city = null;
+    private String bDate = "";
+    private int sex = 0;
+    private int vkId = 0;
 
 
-    public Human(String firstName, String lastName, int birthYear) {
+    public Human(String firstName, String lastName, String birthDate) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthYear = birthYear;
+        this.bDate = birthDate;
     }
 
     public Human(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthYear = 0;
+        this.bDate = null;
+    }
+
+    public void setVkData(int vkId, String bigPhotoUrl, String smallPhotoUrl, String city, String bDate, int sex) {
+        this.vkId = vkId;
+        this.bigPhotoUrl = bigPhotoUrl;
+        this.smallPhotoUrl = smallPhotoUrl;
+        this.city = city;
+        this.bDate = bDate;
+        this.sex = sex;
     }
 
 
@@ -31,13 +47,25 @@ public class Human {
         return lastName;
     }
 
-    public int getBirthYear() {
-        return birthYear;
+    public String getbDate() {
+        return bDate;
     }
+    public int getVkId() {
+        return vkId;
+    }
+    public int getSex() {
+        return sex;
+    }
+    public String getBigPhotoUrl() {return bigPhotoUrl;};
+    public String getSmallPhotoUrl (){return smallPhotoUrl;};
+    public String getCity() {
+        return city;
+    }
+
 
     @Override
     public String toString() {
-        return this.firstName + ' ' + this.lastName + ' ' + this.birthYear;
+        return this.firstName + ' ' + this.lastName + ' ' + this.bDate;
     }
 
 }

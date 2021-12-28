@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 
 public class GraphicsBuilder  {
@@ -23,14 +24,14 @@ public class GraphicsBuilder  {
         dependencies.put("men", 0);
         dependencies.put("women", 0);
         for (var s: students) {
-            if (s.getVkData() == null || s.getVkData().getSex() == 0) {
+            if (s.getVkId() == 0 || s.getSex() == 0) {
                 continue;
             }
-            if (s.getVkData().getSex() == 2) {
+            if (s.getSex() == 2) {
                 int count = dependencies.containsKey("men") ? dependencies.get("men") : 0;
                 dependencies.put("men", count + 1);
             }
-            if (s.getVkData().getSex() == 1) {
+            if (s.getSex() == 1) {
                 int count = dependencies.containsKey("women") ? dependencies.get("women") : 0;
                 dependencies.put("women", count + 1);
             }
@@ -40,13 +41,22 @@ public class GraphicsBuilder  {
         save(chart, "Students by gender.png");
     }
 
+    public static void drawBarGraph(LinkedHashMap<String, Integer> tasks, String name, String path) {
+        var ds = new DefaultCategoryDataset();
+        for (var t: tasks.keySet()) {
+            ds.addValue(tasks.get(t), "a", t);
+        }
+        JFreeChart chart = ChartFactory.createBarChart(name, "theme", "solves", ds);
+        save(chart, path);
+    }
+
     public static void drawGraphByCity(ArrayList<Student> students) {
         var dependencies = new HashMap<String, Integer>();
         for (var s: students) {
-            if (s.getVkData() == null || s.getVkData().getCity() == null) {
+            if (s.getVkId() == 0 || s.getCity() == null) {
                 continue;
             }
-            var city = s.getVkData().getCity();
+            var city = s.getCity();
 
             int count = dependencies.containsKey(city) ? dependencies.get(city) : 0;
             dependencies.put(city, count + 1);
@@ -67,21 +77,12 @@ public class GraphicsBuilder  {
         return dataset;
     }
 
-//    private static KeyedValueDataset createKeyValuedDataset(HashMap<String, Integer> data) {
-//        var dataset = new DefaultCategoryDataset();
-//        dataset.setValue();
-//        for (var str: data.keySet()) {
-//            dataset.setValue(str, data.get(str));
-//        }
-//        return dataset.;
-//    }
-
 
     private static JFreeChart createChart( PieDataset dataset, String graphName) {
         JFreeChart chart = ChartFactory.createPieChart(
                 graphName,   // chart title
                 dataset,          // data
-                true,             // include legend
+                false,             // include legend
                 true,
                 false);
 
@@ -90,7 +91,7 @@ public class GraphicsBuilder  {
 
     public static void save(JFreeChart chart, String path) {
 
-        var image = chart.createBufferedImage(1280,720);
+        var image = chart.createBufferedImage(1440,720);
         try {
             var outputFile = new File(path);
             ImageIO.write(image, "png", outputFile);

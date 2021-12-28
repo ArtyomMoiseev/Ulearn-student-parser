@@ -53,7 +53,7 @@ public class Theme {
     public int getSolvedTasks() {
         var counter = 0;
         for (var t: tasks) {
-            if (t.getScore() > 0 && t.getName().contains("Задача")) {
+            if (t.getScore() > 0 && !t.getName().contains("вопрос")) {
                 counter++;
             }
         }

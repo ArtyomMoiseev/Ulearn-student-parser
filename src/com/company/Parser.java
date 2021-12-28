@@ -25,7 +25,7 @@ abstract class Parser {
             var groupCode = s[1];
             var score = Integer.parseInt(s[2]);
 
-            result.add(new Student(name[1], name[0], new CourseRecord(courseName, groupCode, parseTheme(s, themes, tasks, tasksMax))));
+            result.add(new Student(name[1], name[0], new Course(courseName, groupCode, parseTheme(s, themes, tasks, tasksMax))));
         }
         return result;
     }
